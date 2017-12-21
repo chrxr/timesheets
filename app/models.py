@@ -24,6 +24,7 @@ class Project(models.Model):
     class Meta:
         ordering = ['projectName']
 
+
     def __str__(self):
         return (self.projectName)
 
@@ -31,7 +32,7 @@ class Project(models.Model):
 
 class WorkDay(models.Model):
     date = models.DateField("Date")
-    project = models.ForeignKey('Project')
+    project = models.ForeignKey('Project', null=True, on_delete=models.SET_NULL)
     hours = models.DecimalField(null=True, blank=True, max_digits=4, decimal_places=2)
     days = models.CharField(max_length=255, choices = HOURS_CHOICES)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
